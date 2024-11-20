@@ -23,7 +23,7 @@ class FakeCocktailsAPI: CocktailsAPI {
         self.failure = failure
     }
     
-    var cocktailsPublisher: AnyPublisher<Data, CocktailsAPIError> {
+    var cocktailsPublisher: AnyPublisher<Data, CocktailsAPIError>? {
         if case let .count(count) = failure {
             failure = count - 1 == 0 ? .never : .count(count - 1)
             return Future<Data, CocktailsAPIError> { [weak self] promise in
